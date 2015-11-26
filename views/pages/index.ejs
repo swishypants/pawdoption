@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% include ../partials/header.ejs %>
+	<% include ../partials/nav.ejs %>
+	<% include ../partials/header.ejs %>
 </head>
 
 <body>
 
+	<div class="container">
+		<div class="random_dog" role="alert">
+			Click to generate a random adoptable dog!
+			<br>
+			<button onclick="generateRandom()"><3</button>
+			<div id="random_dog"></div>
+		</div>
+	  
+		<div class="info">
+			
+		</div>
+	</div>
 
-<% include ../pages/about.ejs %>
+
 </body>
-<% include ../partials/footer.ejs %>
 </html>
