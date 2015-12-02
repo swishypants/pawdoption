@@ -1,18 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script type="text/javascript" src="../../index.js"></script>
+	<script>
+		function generate_random() {
+			
+			document.getElementById("random_dog").innerHTML = "Hello World";
+		}
+	</script>
+	
 	<% include ../partials/nav.ejs %>
-	<% include ../partials/header.ejs %>
+	
+	<div class="jumbotron text-center">
+		<div class="container">
+			<a href="/" class="logo">
+				<img src="/logo.png" height="200px" width="200px"/>
+			</a>
+			<h1>Welcome to PAWdoption!</h1>
+		</div>
+	</div>
+	
 </head>
 
 <body>
+
 
 	<div class="container">
 		<div class="random_dog" role="alert">
 			Click to generate a random adoptable dog!
 			<br>
-			<button onclick="generateRandom()"><3</button>
-			<div id="random_dog"></div>
+			<button onclick="generate_random()"><3</button>
+			<p id="random_dog"></p>
 		</div>
 	  
 		<div class="info">
