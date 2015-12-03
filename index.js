@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 var connection = mysql.createConnection({
@@ -65,11 +65,18 @@ app.get('/foster', function(request, response) {
 	response.render('pages/foster');
 });
 
-app.post('adopt_signup', function(request, response) {
-	console.log("POST WORKS");
+app.post('/adopt_signup', function(request, response) {
+	console.log("SIGN UP WORKS");
+	
 	//response.render('/signup');
 	//console.log(request.body.first_name);
+	
 
+});
+
+app.post('/', function(req, res) {
+	console.log("test");
+    res.send('Test input: ' + req.body.input);
 });
 
 function generate_random() {
