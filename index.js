@@ -1,7 +1,13 @@
 var express = require('express');
 var router = express.Router();
-
 var mysql = require('mysql');
+var bodyParser = require('body-parser');
+
+var app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 var connection = mysql.createConnection({
 	host: 'animalshelter.cqfes6my9qk1.us-east-1.rds.amazonaws.com',
 	port: '3306',
@@ -9,20 +15,19 @@ var connection = mysql.createConnection({
 	password: 'doggies1',
 	database: 'animalshelter'
 });
-var app = express();
+
 
 connection.connect(function(err){
 	if(!err){
-		console.log("Database is connected :D \n\n");
+		console.log("Database is connected :D \n");
 	}else{
-		console.log("Error connecting database D: \n\n");
+		console.log("Error connecting database D: \n");
 	}
 });
 
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
-//app.use(express.bodyParser());
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
@@ -58,6 +63,13 @@ app.get('/adopt', function(request, response) {
 
 app.get('/foster', function(request, response) {
 	response.render('pages/foster');
+});
+
+app.post('adopt_signup', function(request, response) {
+	console.log("POST WORKS");
+	//response.render('/signup');
+	//console.log(request.body.first_name);
+
 });
 
 function generate_random() {
