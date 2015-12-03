@@ -22,10 +22,15 @@ connection.connect(function(err){
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
+//app.use(express.bodyParser());
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
 
 app.get('/', function(request, response) {
 	response.render('pages/index');
@@ -39,8 +44,20 @@ app.get('/find', function(request, response) {
 	response.render('pages/find');
 });
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+app.get('/login', function(request, response) {
+	response.render('pages/login');
+});
+
+app.get('/signup', function(request, response) {
+	response.render('pages/signup');
+});
+
+app.get('/adopt', function(request, response) {
+	response.render('pages/adopt');
+});
+
+app.get('/foster', function(request, response) {
+	response.render('pages/foster');
 });
 
 function generate_random() {

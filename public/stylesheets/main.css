@@ -30,3 +30,9 @@ div {
 	text-align:center;
 	font-family: Lucida Sans Unicode;
 }
+
+#footer{
+	background-color: #003366;
+	color: white;
+	position: relative;
+}

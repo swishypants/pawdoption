@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../partials/nav.ejs %>
+	
+	<div class="jumbotron text-center">
+		<div class="container">
+			<a href="/" class="logo">
+				<img src="/logo.png" height="200px" width="200px"/>
+			</a>
+			<h1>Adopt a dog</h1>
+		</div>
+	</div>
+</head>
+
+<body>
+	<section id="adopt-signup">
+		<div class="container">
+			<h1>Sign Up for an Account</h1>
+				<form action="adopt-signup" method="post" style="margin-top: 20px;">
+		  			<label for="formFirstName">First name: </label>
+    			  	<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="formFirstName" name="first_name" placeholder="First Name" maxlength="20">
+					
+					<label for="formLastName">Last name: </label>
+					<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="formLastName" name="last_name" placeholder="Last Name" maxlength="20">
+  			  		
+		  			<label for="formStreet">Address: </label>
+    			  	<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="formStreet" name="street" placeholder="Address" maxlength="40">
+  			  		
+		  			<label for="formCity">City: </label>
+    			  	<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="formCity" name="city" placeholder="City" maxlength="20">
+  			  		
+		  			<label for="formState">State: </label>
+    			  	<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="formState" name="state" placeholder="State" maxlength="20">
+  			  		
+		  			<label for="formZipCode">Zip code:</label>
+    			  	<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="formZipCode" name="zip" placeholder="Zip code" maxlength="5">
+  			  		
+					<label for="formEmail">Email:</label>
+    			  	<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="formEmail" name="email" placeholder="Email" maxlength="5">
+  			  		
+		  			<label for="formPhone">Phone number: </label>
+    			  	<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="formPhone" name="phone" placeholder="Phone number" maxlength="20">
+  			  		
+		  			
+					<label for="house">Please indicate what type of residence you live in: </label>
+					<div class="dropdown">
+						<select>
+							<option value="null"></option>
+							<option value="condo">Condo</option>
+							<option value="apartment">Apartment</option>
+							<option value="house">House</option>
+						</select>
+					</div>
+						
+					<label for="backyard">Does your residence have a fenced yard? </label>
+					<div class="radio">
+						<label><input type="radio" name="optradio">Yes</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="optradio">No</label>
+					</div>
+						
+					<label for="kids">Do you have children residing with you? </label>
+					<div class="radio">
+						<label><input type="radio" name="optradio">Yes</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="optradio">No</label>
+					</div>
+
+					<label for="otherPets">Do you currently have other pets? </label>
+					<div class="radio">
+						<label><input type="radio" name="optradio">Yes</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="optradio">No</label>
+					</div>
+
+					<label for="lifestyle">Please indicate what type of lifestyle preference you have (best match): </label>
+					<div class="dropdown">
+						<select>
+							<option value="null"></option>
+							<option value="active">Active</option>
+							<option value="average">Average</option>
+							<option value="inactive">Inactive</option>
+						</select>
+					</div>
+
+					<label for="house">Please indicate what type of personality you have (best match): </label>
+					<div class="dropdown">
+						<select>
+							<option value="null"></option>
+							<option value="quiet">Quiet</option>
+							<option value="loud">Loud</option>
+							<option value="hilarious">Hilarious</option>
+							<option value="obnoxious">Obnoxious</option>
+							<option value="hostile">Hostile</option>
+						</select>
+					</div>
+					
+					<label for="formUsername">Username: </label>
+    			  	<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="formUsername" name="username" placeholder="Username" maxlength="20">
+  			  		
+		  			<label for="formPassword">Password: </label>
+    			  	<input type="password" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="formPassword" name="password" placeholder="Password" maxlength="20">
+  			  		
+		  			<label for="formConfirmPassword">Confirm Password: </label>
+    			  	<input type="password" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="formConfirmPassword" name="confirmpassword" placeholder="Confirm Password" maxlength="20">
+  			  		
+				
+					<br>
+					<input type="submit" value="Submit">
+  			 	</form>
+			</div>
+		</div>
+	</section>
+
+</body>
+<% include ../partials/footer.ejs %>
+</html>
