@@ -26,6 +26,24 @@
 
 
 	<div class="container">
+		<div class="row">
+			<h1>Sign in to find your perfect dog!</h1>
+			<form action="/login" method="post" style="margin-top: 20px;">
+				<label for="username"></label>
+				<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="username" placeholder="Username">
+				
+				<label for="password"></label>
+				<input type="password" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="password" placeholder="Password">
+				
+				<input type="submit" value="Login">
+			</form>
+			<a href="/signup">Don't have an account? Sign up here.</a>
+			<br>
+			<a href="/guest">Or continue as guest.</a>
+			<br><br>
+		</div>
+		
+		
 		<div class="random_dog" role="alert">
 			Click to generate a random adoptable dog!
 			<br>

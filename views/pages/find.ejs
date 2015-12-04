@@ -17,6 +17,57 @@
 <body>
 	<section id="find">
 		<div class="container">
+			
+			<table class="table">
+				
+			<tbody>
+				<tr>
+					<th>
+						Name
+					</th>
+					<th>
+						Age
+					</th>
+					<th>
+						Gender
+					</th>
+					<th>
+						Breed
+					</th>
+					<th>
+						Size
+					</th>
+					<th>
+						Coat
+					</th>
+					<th>
+						Personality
+					</th>
+					<th>
+						Energy Level
+					</th>
+					<th>
+						Okay with kids
+					</th>
+					<th>
+						Okay with other pets
+					</th>
+				</tr>
+				<% r.forEach(function(r) { %>
+				<tr>
+					<td><%= r.name%></td>
+					<td><%= r.age%></td>
+					<td><%= r.gender%></td>
+					<td><%= r.breed%></td>
+					<td><%= r.size%></td>
+					<td><%= r.coat%></td>
+					<td><%= r.personality%></td>
+					<td><%= r.energy_level%></td>
+					<td><%= r.okay_with_kids%></td>
+					<td><%= r.okay_with_other_pets%></td>
+				</tr>
+				<% }); %>
+				</table>
 
 			<!--div class="row">
 				<h1>Find a specific type of dog</h1>

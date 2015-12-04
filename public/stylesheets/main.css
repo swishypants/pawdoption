@@ -31,6 +31,13 @@ div {
 	font-family: Lucida Sans Unicode;
 }
 
+table {
+	text-align: center;
+}
+th {
+	text-align: center;
+}
+
 #footer{
 	background-color: #003366;
 	color: white;
