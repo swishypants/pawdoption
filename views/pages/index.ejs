@@ -27,20 +27,100 @@
 
 	<div class="container">
 		<div class="row">
-			<h1>Sign in to find your perfect dog!</h1>
-			<form action="/login" method="post" style="margin-top: 20px;">
-				<label for="username"></label>
-				<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="username" placeholder="Username">
+			<h1>Find your dog match!</h1>
+			<form method="post" action="adopt_signup" style="margin-top: 20px;">
+				<label for="first_name">First name: </label>
+				<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="first_name" name="first_name" placeholder="First Name" maxlength="20">
 				
-				<label for="password"></label>
-				<input type="password" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="password" placeholder="Password">
+				<label for="last_name">Last name: </label>
+				<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="last_name" name="last_name" placeholder="Last Name" maxlength="20">
 				
-				<input type="submit" value="Login">
+				<label for="street">Address: </label>
+				<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="street" name="street" placeholder="Address" maxlength="40">
+				
+				<label for="city">City: </label>
+				<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="city" name="city" placeholder="City" maxlength="20">
+				
+				<label for="state">State: </label>
+				<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="state" name="state" placeholder="State" maxlength="20">
+				
+				<label for="zip">Zip code:</label>
+				<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="zip" name="zip" placeholder="Zip code" maxlength="5">
+				
+				<label for="email">Email:</label>
+				<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="email" name="email" placeholder="Email" maxlength="5">
+				
+				<label for="phone">Phone number: </label>
+				<input type="text" class="form-control" style="width: 50%; margin: 0 auto; margin-top:10px;" id="phone" name="phone" placeholder="Phone number" maxlength="20">
+				
+				
+				<label for="house_style">Please indicate what type of residence you live in: </label>
+				<div class="dropdown">
+					<select id="house_style" name="house_style">
+						<option value="null"></option>
+						<option value="condo">Condo</option>
+						<option value="apartment">Apartment</option>
+						<option value="house">House</option>
+					</select>
+				</div>
+					
+				<label for="has_fenced_yard">Does your residence have a fenced yard? </label>
+				<div class="dropdown">
+					<select id="has_fenced_yard" name="has_fenced_yard">
+						<option value="null"></option>
+						<option value="TRUE">Yes</option>
+						<option value="FALSE">No</option>
+					</select>
+					<!--label for="has_fenced_yard" name="has_fenced_yard"><input type="radio" name="has_fenced_yard" value="TRUE"  >Yes</label>
+					<label for="has_fenced_yard" name="has_fenced_yard"><input type="radio" name="has_fenced_yard" value="FALSE" >No</label-->
+				</div>
+				
+				<label for="has_kids">Do you have children residing with you? </label>
+				<div class="dropdown">
+					<select id="has_kids" name="has_kids">
+						<option value="null"></option>
+						<option value="TRUE">Yes</option>
+						<option value="FALSE">No</option>
+					</select>
+					<!--label for="has_kids" name="has_kids"><input type="radio" value="TRUE"  name="has_kids" >Yes</label>
+					<label for="has_kids" name="has_kids"><input type="radio" value="FALSE" name="has_kids" >No</label-->
+				</div>
+
+				<label for="has_other_pets">Do you currently have other pets? </label>
+				<div class="dropdown">
+					<select id="has_other_pets" name="has_other_pets">
+						<option value="null"></option>
+						<option value="TRUE">Yes</option>
+						<option value="FALSE">No</option>
+					</select>
+					<!--label for="has_other_pets" name="has_other_pets"><input type="radio" value="TRUE"  name="has_other_pets" >Yes</label>
+					<label for="has_other_pets" name="has_other_pets"><input type="radio" value="FALSE" name="has_other_pets" >No</label-->
+				</div>
+
+				<label for="lifestyle_preference">Please indicate what type of lifestyle preference you have (best match): </label>
+				<div class="dropdown">
+					<select name="lifestyle_preference" id="lifestyle_preference">
+						<option value="null"></option>
+						<option value="active">Active</option>
+						<option value="average">Average</option>
+						<option value="inactive">Inactive</option>
+					</select>
+				</div>
+
+				<label for="personality">Please indicate what type of personality you have (best match): </label>
+				<div class="dropdown">
+					<select name="personality" id="personality">
+						<option value="null"></option>
+						<option value="sanguine">Social</option>
+						<option value="choleric">Confident</option>
+						<option value="melancholic">Analytical</option>
+						<option value="phlegmatic">Mild-mannered</option>
+					</select>
+				</div>
+			
+				<br>
+				<input type="submit" value="Submit">
 			</form>
-			<a href="/signup">Don't have an account? Sign up here.</a>
-			<br>
-			<a href="/guest">Or continue as guest.</a>
-			<br><br>
 		</div>
 		
 		

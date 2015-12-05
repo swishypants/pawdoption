@@ -23,6 +23,9 @@
 			<tbody>
 				<tr>
 					<th>
+						Dog ID
+					</th>
+					<th>
 						Name
 					</th>
 					<th>
@@ -47,14 +50,12 @@
 						Energy Level
 					</th>
 					<th>
-						Okay with kids
-					</th>
-					<th>
-						Okay with other pets
+						Shelter
 					</th>
 				</tr>
 				<% r.forEach(function(r) { %>
 				<tr>
+					<td><%= r.dog_id%></td>
 					<td><%= r.name%></td>
 					<td><%= r.age%></td>
 					<td><%= r.gender%></td>
@@ -63,8 +64,7 @@
 					<td><%= r.coat%></td>
 					<td><%= r.personality%></td>
 					<td><%= r.energy_level%></td>
-					<td><%= r.okay_with_kids%></td>
-					<td><%= r.okay_with_other_pets%></td>
+					<td><a href="/" type="button" onclick="findShelter()">Click here</a></td>
 				</tr>
 				<% }); %>
 				</table>

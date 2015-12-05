@@ -96,10 +96,6 @@ app.get('/about', function(request, response) {
 	response.render('pages/about');
 });
 
-app.get('/find', function(request, response) {
-	request.send(request);
-	response.render('pages/find');
-});
 
 /*app.get('/login', function(request, response) {
 	response.render('pages/login');
@@ -146,108 +142,97 @@ app.post('/adopt_signup', function(request, response) {
 	var has_other_pets		 = request.body.has_other_pets;
 	var lifestyle_preference = request.body.lifestyle_preference;
 	var personality			 = request.body.personality;
-	var username			 = request.body.username;
-	var password			 = request.body.password;
 	
-	var q_size, q_kids, q_pets, q_personality, q_energy;
+	var q_size, q_kids, q_pets, q_personality, q_energy, q_personality, q_energy;
 	
-	if(has_fenced_yard==="on") {
-		has_fenced_yard = "TRUE";
+	if(has_fenced_yard==="TRUE") {
 		q_size = "";
 	}
 	else {
-		has_fenced_yard = "FALSE";
 		q_size = "d.size<>'large'"; // no large dogs if they don't have a fenced yard
 	}
-	if(has_kids==="on") {
-		has_kids = "TRUE";
-		q_kids = " AND d.okay_with_kids='TRUE'"; // dog must be okay with kids
+	
+	if(has_kids==="TRUE") {
+		q_kids = "d.okay_with_kids='TRUE'"; // dog must be okay with kids
 	}
 	else {
-		has_kids = "FALSE";
 		q_kids = "";
 	}
-	if(has_other_pets==="on") {
-		has_other_pets = "TRUE";
-		q_pets = " AND d.okay_with_other_pets='TRUE'"; // dog with be okay with other pets
+	
+	if(has_other_pets==="TRUE") {
+		q_pets = "d.okay_with_other_pets='TRUE'"; // dog with be okay with other pets
 	}
 	else {
-		has_other_pets = "FALSE";
 		q_pets = "";
 	}
 	
-	connection.query("SELECT * FROM animalshelter.Dog d", function(err, rows) {
-		if(rows===undefined) {
-			console.log("Empty");
-		}
-		response.render('pages/find', {r:rows});
-	});
-	
-	
-	
-	/*if(has_kids === "TRUE") {
-		if(has_other_pets === "TRUE") {
-			if(has_fenced_yard === "FALSE") {
-				connection.query('SELECT * FROM Dog WHERE okay_with_kids="TRUE" AND okay_with_pets="TRUE" AND size!="large"', function(err, rows, fields) {
-					response.render('pages/find', {r:rows});
-				});
-			}
-			else {
-				connection.query('SELECT * FROM Dog WHERE okay_with_kids="TRUE" AND okay_with_pets="TRUE"', function(err, rows, fields) {
-					response.render('pages/find', {r:rows});
-				});
-			}
-		}
-		
-		else {
-			if(has_fenced_yard === "FALSE") {
-				connection.query('SELECT * FROM Dog WHERE okay_with_kids="TRUE" AND size!="large"', function(err, rows, fields) {
-					response.render('pages/find', {r:rows});
-				});
-			}
-			else {
-				connection.query('SELECT * FROM Dog WHERE okay_with_kids="TRUE"', function(err, rows, fields) {
-					response.render('pages/find', {r:rows});
-				});
-			}
-		}
+	if(personality==="sanguine") {
+		q_personality = "d.personality!='independent'";
+	}
+	else if(personality==="choleric") {
+		q_personality = "d.personality!='shy'";
+	}
+	else if(personality==="melancholic") {
+		q_personality = "d.personality!='independent'";
+	}
+	else if(personality==="phlegmatic") {
+		q_personality = "d.personality!='confident'";
+	}
+	else {
+		console.log("personality: this shouldn't happen");
+		q_personality = "";
 	}
 	
+	if(lifestyle_preference==="active") {
+		q_energy = "d.energy_level='high'";
+	}
+	else if(lifestyle_preference==="average") {
+		q_energy = "d.energy_level='medium'";
+	}
+	else if(lifestyle_preference==="inactive") {
+		q_energy = "d.energy_level='low'";
+	}
 	else {
-		if(has_other_pets === "TRUE") {
-			if(has_fenced_yard === "FALSE") {
-				connection.query('SELECT * FROM Dog WHERE okay_with_pets="TRUE" AND size!="large"', function(err, rows, fields) {
-					response.render('pages/find', {r:rows});
-				});
-			}
-			else {
-				connection.query('SELECT * FROM Dog WHERE okay_with_pets="TRUE"', function(err, rows, fields) {
-					response.render('pages/find', {r:rows});
-				});
-			}
-		}
-		
-		else {
-			if(has_fenced_yard === "FALSE") {
-				connection.query('SELECT * FROM Dog WHEREAND size!="large"', function(err, rows, fields) {
-					response.render('pages/find', {r:rows});
-				});
-			}
-			else {
-				connection.query('SELECT * FROM Dog', function(err, rows, fields) {
-					response.render('pages/find', {r:rows});
-				});
-			}
-		}
-	}*/
+		console.log("lifestyle_preference: this shouldn't happen");
+		q_energy = "";
+	}
+	
+	if(q_size==="" && q_kids==="" && q_pets==="") { // none of q_size, q_kids, q_pets
+		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_personality, function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
+	}
+	else if(q_size==="") { // q_kids and q_pets
+		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_kids + " AND " + q_pets + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
+	}
+	else if(q_kids==="") { // q_size and q_pets
+		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_size + " AND " + q_pets + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
+	}
+	else if(q_pets==="") { // q_size and q_kids
+		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_size + " AND " + q_kids + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
+	}
+	else if(q_size!="" && q_kids!="" && q_pets!="") { // all of q_size, q_kids, q_pets
+		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_size + " AND " + q_kids + " AND " + q_pets + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
+	}
+	else { // one of q_size, q_kids, q_pets
+		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_size + q_kids + q_pets + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
+	}
 	
 	
 	
-	//var post  = {first_name: first_name, last_name: last_name, street: street, city: city, state: state, zip: zip, email: email, phone: phone, house_style, house_style, has_fenced_yard: has_fenced_yard, has_kids: has_kids, has_other_pets: has_other_pets, lifestyle_preference: lifestyle_preference, personality: personality, username: username, password: password};
-
-	var post  = {first_name: first_name, last_name: last_name, street: street, city: city, state: state, zip: zip, email: email, phone: phone, house_style, house_style, has_fenced_yard: has_fenced_yard, has_kids: has_kids, has_other_pets: has_other_pets, lifestyle_preference: lifestyle_preference, personality: personality, username: username, password: password};
+	/*var post  = {first_name: first_name, last_name: last_name, street: street, city: city, state: state, zip: zip, email: email, phone: phone, house_style, house_style, has_fenced_yard: has_fenced_yard, has_kids: has_kids, has_other_pets: has_other_pets, lifestyle_preference: lifestyle_preference, personality: personality};
 	
-	/*var query = connection.query('INSERT INTO Adopter SET ?', post, function(err, result) {
+	var query = connection.query('INSERT INTO Adopter SET ?', post, function(err, result) {
 		if(err) throw err;
 		//connection.end();
 		
