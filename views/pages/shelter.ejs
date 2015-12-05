@@ -22,30 +22,30 @@
 			<tbody>
 				<tr>
 					<th>
-						Shelter ID
+						<a href="/shelter/sort-id">Shelter ID</a>
 					</th>
 					<th>
-						Name
+						<a href="/shelter/sort-name">Name</a>
 					</th>
 					<th>
-						Street
+						<a href="/shelter/sort-street">Street</a>
 					</th>
 					<th>
-						City
+						<a href="/shelter/sort-city">City</a>
 					</th>
 					<th>
-						State
+						<a href="/shelter/sort-state">State</a>
 					</th>
 					<th>
-						Zip
+						<a href="/shelter/sort-zip">Zip</a>
 					</th>
 					<th>
-						Phone
+						<a href="/shelter/sort-phone">Phone</a>
 					</th>
 				</tr>
 				<% r.forEach(function(r) { %>
 				<tr>
-					<td><a href="/shelter/<%= r.shelter_id%>"><%= r.shelter_id%></a></td>
+					<td><a href="/shelter_dogs/<%= r.shelter_id%>"><%= r.shelter_id%></a></td>
 					<td><%= r.shelter_name%></td>
 					<td><%= r.street%></td>
 					<td><%= r.city%></td>

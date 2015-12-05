@@ -22,34 +22,34 @@
 			<tbody>
 				<tr>
 					<th>
-						<a href="sort">Dog ID</a>
+						<a href="/dog/sort-id">Dog ID</a>
 					</th>
 					<th>
-						Name
+						<a href="/dog/sort-name">Name</a>
 					</th>
 					<th>
-						Age
+						<a href="/dog/sort-age">Age
 					</th>
 					<th>
-						Gender
+						<a href="/dog/sort-gender">Gender
 					</th>
 					<th>
-						Breed
+						<a href="/dog/sort-breed">Breed
 					</th>
 					<th>
-						Size
+						<a href="/dog/sort-size">Size
 					</th>
 					<th>
-						Coat
+						<a href="/dog/sort-coat">Coat
 					</th>
 					<th>
-						Temperament
+						<a href="/dog/sort-personality">Temperament
 					</th>
 					<th>
-						Energy Level
+						<a href="/dog/sort-energy">Energy Level
 					</th>
 					<th>
-						Shelter
+						<a href="/dog/sort-shelter">Shelter
 					</th>
 				</tr>
 				<% r.forEach(function(r) { %>
@@ -63,7 +63,7 @@
 					<td><%= r.coat%></td>
 					<td><%= r.personality%></td>
 					<td><%= r.energy_level%></td>
-					<td><a href="/shelter/<%= r.shelter_id%>"><%= r.shelter_id%></a></td>
+					<td><a href="/shelter_dogs/<%= r.shelter_id%>"><%= r.shelter_id%></a></td>
 				</tr>
 				<% }); %>
 			</table>

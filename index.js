@@ -92,34 +92,201 @@ app.get('/', function(request, response) {
 	response.render('pages/index');
 });
 
-app.get('/dog', function(request, response) {
-	connection.query("SELECT * FROM animalshelter.Dog", function(err, rows) {
+/*app.get('/sort', function(request, response) {
+	connection.query(q + " ORDER BY d.name ASC", function(err, rows) {
 		response.render('pages/dog', {r:rows});
+	});
+});*/
+
+var dog_query = "SELECT * FROM Dog d";
+var shelter_query = "SELECT * FROM Shelter s";
+
+app.get('/dog', function(request, response) {
+	connection.query(dog_query, function(err, rows) {
+		response.render('pages/dog', {r:rows});
+	});
+	
+	// sort
+	app.get('/sort-id', function(request, response) {
+		connection.query(dog_query + " ORDER BY d.dog_id ASC", function(err, rows) {
+			response.render('pages/dog', {r:rows});
+		});
+	});
+	
+	app.get('/dog/sort-name', function(request, response) {
+		connection.query(dog_query + " ORDER BY d.name ASC", function(err, rows) {
+			response.render('pages/dog', {r:rows});
+		});
+	});
+	
+	app.get('/dog/sort-age', function(request, response) {
+		connection.query(dog_query + " ORDER BY d.age ASC", function(err, rows) {
+			response.render('pages/dog', {r:rows});
+		});
+	});
+	
+	app.get('/dog/sort-gender', function(request, response) {
+		connection.query(dog_query + " ORDER BY d.gender ASC", function(err, rows) {
+			response.render('pages/dog', {r:rows});
+		});
+	});
+	
+	app.get('/dog/sort-breed', function(request, response) {
+		connection.query(dog_query + " ORDER BY d.breed ASC", function(err, rows) {
+			response.render('pages/dog', {r:rows});
+		});
+	});
+	
+	app.get('/dog/sort-size', function(request, response) {
+		connection.query(dog_query + " ORDER BY d.size ASC", function(err, rows) {
+			response.render('pages/dog', {r:rows});
+		});
+	});
+	
+	app.get('/dog/sort-coat', function(request, response) {
+		connection.query(dog_query + " ORDER BY d.coat ASC", function(err, rows) {
+			response.render('pages/dog', {r:rows});
+		});
+	});
+	
+	app.get('/dog/sort-personality', function(request, response) {
+		connection.query(dog_query + " ORDER BY d.personality ASC", function(err, rows) {
+			response.render('pages/dog', {r:rows});
+		});
+	});
+	
+	app.get('/dog/sort-energy', function(request, response) {
+		connection.query(dog_query + " ORDER BY d.energy_level ASC", function(err, rows) {
+			response.render('pages/dog', {r:rows});
+		});
+	});
+	
+	app.get('/dog/sort-shelter', function(request, response) {
+		connection.query(dog_query + " ORDER BY d.shelter_id ASC", function(err, rows) {
+			response.render('pages/dog', {r:rows});
+		});
 	});
 });
 
 app.get('/shelter', function(request, response) {
-	connection.query("SELECT * FROM animalshelter.Shelter", function(err, rows) {
+	connection.query(shelter_query, function(err, rows) {
 		response.render('pages/shelter', {r:rows});
 	});
+	
+	// sort
+	app.get('/shelter/sort-id', function(request, response) {
+		connection.query(shelter_query + " ORDER BY s.shelter_id ASC", function(err, rows) {
+			response.render('pages/shelter', {r:rows});
+		});
+	});
+	
+	app.get('/shelter/sort-name', function(request, response) {
+		connection.query(shelter_query + " ORDER BY s.shelter_name ASC", function(err, rows) {
+			response.render('pages/shelter', {r:rows});
+		});
+	});
+	
+	app.get('/shelter/sort-street', function(request, response) {
+		connection.query(shelter_query + " ORDER BY s.street ASC", function(err, rows) {
+			response.render('pages/shelter', {r:rows});
+		});
+	});
+	
+	app.get('/shelter/sort-city', function(request, response) {
+		connection.query(shelter_query + " ORDER BY s.city ASC", function(err, rows) {
+			response.render('pages/shelter', {r:rows});
+		});
+	});
+	
+	app.get('/shelter/sort-state', function(request, response) {
+		connection.query(shelter_query + " ORDER BY s.state ASC", function(err, rows) {
+			response.render('pages/shelter', {r:rows});
+		});
+	});
+	
+	app.get('/shelter/sort-zip', function(request, response) {
+		connection.query(shelter_query + " ORDER BY s.zip ASC", function(err, rows) {
+			response.render('pages/shelter', {r:rows});
+		});
+	});
+	
+	app.get('/shelter/sort-phone', function(request, response) {
+		connection.query(shelter_query + " ORDER BY s.phone ASC", function(err, rows) {
+			response.render('pages/shelter', {r:rows});
+		});
+	});
 });
 
-app.get('/shelter/:shelter_id', function(request, response) {
+app.get('/shelter_dogs/:shelter_id', function(request, response) {
 	var id = request.params.shelter_id;
-	
-	connection.query("SELECT * FROM animalshelter.Shelter s, animalshelter.Dog d WHERE s.shelter_id=d.shelter_id AND s.shelter_id = '" + id + "'", function(err, rows) {
+	var shelter_id_query = "SELECT * FROM Shelter s, Dog d WHERE s.shelter_id=d.shelter_id AND s.shelter_id = '" + id + "'";
+	connection.query(shelter_id_query, function(err, rows) {
 		response.render('pages/shelter_dogs', {r:rows});
 	});
-	/*connection.query("SELECT * FROM animalshelter.Shelter s WHERE s.shelter_id = '" + id + "' LIMIT 1", function(err, row) {
-		if(err) throw err;
-		connection.query("SELECT * FROM animalshelter.Dog d WHERE d.shelter_id = '" + id + "'", function(err, rows) {
-			if(err) throw err;
-			response.render('pages/shelter_dogs', {s:row}, {d:rows});
+	
+	// sort
+	app.get('/shelter_dogs/' + id + '/sort-id', function(request, response) {
+		connection.query(shelter_id_query + " ORDER BY d.dog_id ASC", function(err, rows) {
+			response.render('pages/shelter_dogs', {r:rows});
 		});
-	});*/
+	});
+	
+	app.get('/shelter_dogs/:shelter_id/sort-name', function(request, response) {
+		connection.query(shelter_id_query + " ORDER BY d.name ASC", function(err, rows) {
+			response.render('pages/shelter_dogs', {r:rows});
+		});
+	});
+	
+	app.get('/shelter_dogs/:shelter_id/sort-age', function(request, response) {
+		connection.query(shelter_id_query + " ORDER BY d.age ASC", function(err, rows) {
+			response.render('pages/shelter_dogs', {r:rows});
+		});
+	});
+	
+	app.get('/shelter_dogs/:shelter_id/sort-gender', function(request, response) {
+		connection.query(shelter_id_query + " ORDER BY d.gender ASC", function(err, rows) {
+			response.render('pages/shelter_dogs', {r:rows});
+		});
+	});
+	
+	app.get('/shelter_dogs/:shelter_id/sort-breed', function(request, response) {
+		connection.query(shelter_id_query + " ORDER BY d.breed ASC", function(err, rows) {
+			response.render('pages/shelter_dogs', {r:rows});
+		});
+	});
+	
+	app.get('/shelter_dogs/:shelter_id/sort-size', function(request, response) {
+		connection.query(shelter_id_query + " ORDER BY d.size ASC", function(err, rows) {
+			response.render('pages/shelter_dogs', {r:rows});
+		});
+	});
+	
+	app.get('/shelter_dogs/:shelter_id/sort-coat', function(request, response) {
+		connection.query(shelter_id_query + " ORDER BY d.coat ASC", function(err, rows) {
+			response.render('pages/shelter_dogs', {r:rows});
+		});
+	});
+	
+	app.get('/shelter_dogs/:shelter_id/sort-personality', function(request, response) {
+		connection.query(shelter_id_query + " ORDER BY d.personality ASC", function(err, rows) {
+			response.render('pages/shelter_dogs', {r:rows});
+		});
+	});
+	
+	app.get('/shelter_dogs/:shelter_id/sort-energy', function(request, response) {
+		connection.query(shelter_id_query + " ORDER BY d.energy_level ASC", function(err, rows) {
+			response.render('pages/shelter_dogs', {r:rows});
+		});
+	});
+	
+	app.get('/shelter_dogs/:shelter_id/sort-shelter', function(request, response) {
+		connection.query(shelter_id_query + " ORDER BY d.shelter_id ASC", function(err, rows) {
+			response.render('pages/shelter_dogs', {r:rows});
+		});
+	});
 });
 
-app.post('/adopt_signup', function(request, response) {
+app.post('/find', function(request, response) {
 	console.log("form submitted");
 	//response.redirect('pages/find');
 	
@@ -140,7 +307,7 @@ app.post('/adopt_signup', function(request, response) {
 	
 	var q_size, q_kids, q_pets, q_personality, q_energy, q_personality, q_energy;
 	
-	var q = "SELECT * FROM animalshelter.Dog d WHERE ";
+	q = "SELECT * FROM Dog d WHERE ";
 	
 	if(has_fenced_yard==="TRUE") {
 		q_size = "";
@@ -221,12 +388,70 @@ app.post('/adopt_signup', function(request, response) {
 		});
 	});
 	console.log(query.sql);*/
+	
+	// sort find
+app.get('/find/sort-id', function(request, response) {
+	connection.query(q + " ORDER BY d.dog_id ASC", function(err, rows) {
+		response.render('pages/find', {r:rows});
+	});
 });
 
-app.post('/', function(req, res) {
-	console.log("test");
-    res.send('Test input: ' + req.body.input);
+app.get('/find/sort-name', function(request, response) {
+	connection.query(q + " ORDER BY d.name ASC", function(err, rows) {
+		response.render('pages/find', {r:rows});
+	});
 });
+
+app.get('/find/sort-age', function(request, response) {
+	connection.query(q + " ORDER BY d.age ASC", function(err, rows) {
+		response.render('pages/find', {r:rows});
+	});
+});
+
+app.get('/find/sort-gender', function(request, response) {
+	connection.query(q + " ORDER BY d.gender ASC", function(err, rows) {
+		response.render('pages/find', {r:rows});
+	});
+});
+
+app.get('/find/sort-breed', function(request, response) {
+	connection.query(q + " ORDER BY d.breed ASC", function(err, rows) {
+		response.render('pages/find', {r:rows});
+	});
+});
+
+app.get('/find/sort-size', function(request, response) {
+	connection.query(q + " ORDER BY d.size ASC", function(err, rows) {
+		response.render('pages/find', {r:rows});
+	});
+});
+
+app.get('/find/sort-coat', function(request, response) {
+	connection.query(q + " ORDER BY d.coat ASC", function(err, rows) {
+		response.render('pages/find', {r:rows});
+	});
+});
+
+app.get('/find/sort-personality', function(request, response) {
+	connection.query(q + " ORDER BY d.personality ASC", function(err, rows) {
+		response.render('pages/find', {r:rows});
+	});
+});
+
+app.get('/find/sort-energy', function(request, response) {
+	connection.query(q + " ORDER BY d.energy_level ASC", function(err, rows) {
+		response.render('pages/find', {r:rows});
+	});
+});
+
+app.get('/find/sort-shelter', function(request, response) {
+	connection.query(q + " ORDER BY d.shelter_id ASC", function(err, rows) {
+		response.render('pages/find', {r:rows});
+	});
+});
+});
+
+
 
 function generate_random() {
 	console.log("Button clicked");

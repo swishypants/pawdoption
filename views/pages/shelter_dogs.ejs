@@ -63,32 +63,34 @@
 			<tbody>
 				<tr>
 					<th>
-						Dog ID
+					<% r.some(function(r) {%>
+						<a href="/shelter_dogs/<%= r.shelter_id%>/sort-id">Dog ID</a>
 					</th>
 					<th>
-						Name
+						<a href="/shelter_dogs/<%= r.shelter_id%>/sort-name">Name</a>
 					</th>
 					<th>
-						Age
+						<a href="/shelter_dogs/<%= r.shelter_id%>/sort-age">Age</a>
 					</th>
 					<th>
-						Gender
+						<a href="/shelter_dogs/<%= r.shelter_id%>/sort-gender">Gender</a>
 					</th>
 					<th>
-						Breed
+						<a href="/shelter_dogs/<%= r.shelter_id%>/sort-breed">Breed</a>
 					</th>
 					<th>
-						Size
+						<a href="/shelter_dogs/<%= r.shelter_id%>/sort-size">Size</a>
 					</th>
 					<th>
-						Coat
+						<a href="/shelter_dogs/<%= r.shelter_id%>/sort-coat">Coat</a>
 					</th>
 					<th>
-						Temperament
+						<a href="/shelter_dogs/<%= r.shelter_id%>/sort-personality">Temperament</a>
 					</th>
 					<th>
-						Energy Level
+						<a href="/shelter_dogs/<%= r.shelter_id%>/sort-energy">Energy Level</a>
 					</th>
+					<% return true; }); %>
 				</tr>
 				<% r.forEach(function(r) { %>
 				<tr>
