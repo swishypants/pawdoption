@@ -17,7 +17,56 @@
 <body>
 	<section id="dog">
 		<div class="container">
-			
+			<table class="table">
+				
+			<tbody>
+				<tr>
+					<th>
+						Dog ID
+					</th>
+					<th>
+						Name
+					</th>
+					<th>
+						Age
+					</th>
+					<th>
+						Gender
+					</th>
+					<th>
+						Breed
+					</th>
+					<th>
+						Size
+					</th>
+					<th>
+						Coat
+					</th>
+					<th>
+						Personality
+					</th>
+					<th>
+						Energy Level
+					</th>
+					<th>
+						Shelter
+					</th>
+				</tr>
+				<% r.forEach(function(r) { %>
+				<tr>
+					<td><%= r.dog_id%></td>
+					<td><%= r.name%></td>
+					<td><%= r.age%></td>
+					<td><%= r.gender%></td>
+					<td><%= r.breed%></td>
+					<td><%= r.size%></td>
+					<td><%= r.coat%></td>
+					<td><%= r.personality%></td>
+					<td><%= r.energy_level%></td>
+					<td><a href="/shelter/<%= r.shelter_id%>"><%= r.shelter_id%></a></td>
+				</tr>
+				<% }); %>
+				</table>
 			
 		</div>
 		

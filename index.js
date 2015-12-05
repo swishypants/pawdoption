@@ -93,11 +93,23 @@ app.get('/', function(request, response) {
 });
 
 app.get('/dog', function(request, response) {
-	response.render('pages/dog');
+	connection.query("SELECT * FROM animalshelter.Dog", function(err, rows) {
+		response.render('pages/dog', {r:rows});
+	});
 });
 
 app.get('/shelter', function(request, response) {
-	response.render('pages/shelter');
+	connection.query("SELECT * FROM animalshelter.Shelter", function(err, rows) {
+		response.render('pages/shelter', {r:rows});
+	});
+});
+
+app.get('/shelter/:shelter_id', function(request, response) {
+	var id = request.params.shelter_id;
+	
+	connection.query("SELECT * FROM animalshelter.Shelter s WHERE s.shelter_id = '" + id + "'", function(err, rows) {
+		response.render('pages/shelter', {r:rows});
+	});
 });
 
 app.post('/adopt_signup', function(request, response) {
@@ -121,15 +133,19 @@ app.post('/adopt_signup', function(request, response) {
 	
 	var q_size, q_kids, q_pets, q_personality, q_energy, q_personality, q_energy;
 	
+	var q = "SELECT * FROM animalshelter.Dog d WHERE ";
+	
 	if(has_fenced_yard==="TRUE") {
 		q_size = "";
 	}
 	else {
 		q_size = "d.size<>'large'"; // no large dogs if they don't have a fenced yard
+		q += q_size + " AND ";
 	}
 	
 	if(has_kids==="TRUE") {
 		q_kids = "d.okay_with_kids='TRUE'"; // dog must be okay with kids
+		q += q_kids + " AND ";
 	}
 	else {
 		q_kids = "";
@@ -137,6 +153,7 @@ app.post('/adopt_signup', function(request, response) {
 	
 	if(has_other_pets==="TRUE") {
 		q_pets = "d.okay_with_other_pets='TRUE'"; // dog must be okay with other pets
+		q += q_pets + " AND ";
 	}
 	else {
 		q_pets = "";
@@ -144,15 +161,19 @@ app.post('/adopt_signup', function(request, response) {
 	
 	if(personality==="sanguine") {
 		q_personality = "d.personality!='independent'";
+		q += q_personality + " AND ";
 	}
 	else if(personality==="choleric") {
 		q_personality = "d.personality!='shy'";
+		q += q_personality + " AND ";
 	}
 	else if(personality==="melancholic") {
 		q_personality = "d.personality!='independent'";
+		q += q_personality + " AND ";
 	}
 	else if(personality==="phlegmatic") {
 		q_personality = "d.personality!='confident'";
+		q += q_personality + " AND ";
 	}
 	else {
 		console.log("personality: this shouldn't happen");
@@ -161,48 +182,24 @@ app.post('/adopt_signup', function(request, response) {
 	
 	if(lifestyle_preference==="active") {
 		q_energy = "d.energy_level='high'";
+		q += q_energy;
 	}
 	else if(lifestyle_preference==="average") {
 		q_energy = "d.energy_level='medium'";
+		q += q_energy;
 	}
 	else if(lifestyle_preference==="inactive") {
 		q_energy = "d.energy_level='low'";
+		q += q_energy;
 	}
 	else {
 		console.log("lifestyle_preference: this shouldn't happen");
 		q_energy = "";
 	}
 	
-	if(q_size==="" && q_kids==="" && q_pets==="") { // none of q_size, q_kids, q_pets
-		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_personality, function(err, rows) {
-			response.render('pages/find', {r:rows});
-		});
-	}
-	else if(q_size==="" && q_kids!="" && q_pets!="") { // q_kids and q_pets
-		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_kids + " AND " + q_pets + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
-			response.render('pages/find', {r:rows});
-		});
-	}
-	else if(q_kids==="" && q_size!="" && q_pets!="") { // q_size and q_pets
-		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_size + " AND " + q_pets + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
-			response.render('pages/find', {r:rows});
-		});
-	}
-	else if(q_pets==="" && q_size!="" && q_kids!="") { // q_size and q_kids
-		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_size + " AND " + q_kids + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
-			response.render('pages/find', {r:rows});
-		});
-	}
-	else if(q_size!="" && q_kids!="" && q_pets!="") { // all of q_size, q_kids, q_pets
-		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_size + " AND " + q_kids + " AND " + q_pets + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
-			response.render('pages/find', {r:rows});
-		});
-	}
-	else { // one of q_size, q_kids, q_pets
-		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_size + q_kids + q_pets + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
-			response.render('pages/find', {r:rows});
-		});
-	}
+	connection.query(q, function(err, rows) {
+		response.render('pages/find', {r:rows});
+	});
 	
 	/*var post  = {first_name: first_name, last_name: last_name, street: street, city: city, state: state, zip: zip, email: email, phone: phone, house_style, house_style, has_fenced_yard: has_fenced_yard, has_kids: has_kids, has_other_pets: has_other_pets, lifestyle_preference: lifestyle_preference, personality: personality};
 	

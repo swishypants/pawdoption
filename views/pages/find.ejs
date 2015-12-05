@@ -64,27 +64,10 @@
 					<td><%= r.coat%></td>
 					<td><%= r.personality%></td>
 					<td><%= r.energy_level%></td>
-					<td><a href="/shelter/" + <%= r.shelter_id%> + "" type="button" onclick="findShelter()"><%= r.shelter_id%></a></td>
+					<td><a href="/shelter/<%= r.shelter_id%>"><%= r.shelter_id%></a></td>
 				</tr>
 				<% }); %>
-				</table>
-
-			<!--div class="row">
-				<h1>Find a specific type of dog</h1>
-			</div>
-			
-			
-			<div class="row">
-				<div class="col-md-7">
-					<h1>Foster?</h1>
-					<a href="/foster"><button type="button">Click here!</button></a>
-				</div>
-				
-				<div class="col-md-3">
-					<h1>Adopter?</h1>
-					<a href="../adopt"><button type="button">Click here!</button></a>
-				</div>
-			</div-->
+			</table>
 			
 		</div>
 		

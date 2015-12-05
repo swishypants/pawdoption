@@ -8,7 +8,7 @@
 			<a href="/" class="logo">
 				<img src="/logo.png" height="200px" width="200px"/>
 			</a>
-			<h1>List of all Shelters</h1>
+			<h1>Shelters</h1>
 		</div>
 	</div>
 	
@@ -17,7 +17,44 @@
 <body>
 	<section id="shelter">
 		<div class="container">
-			
+						<table class="table">
+				
+			<tbody>
+				<tr>
+					<th>
+						Shelter ID
+					</th>
+					<th>
+						Name
+					</th>
+					<th>
+						Street
+					</th>
+					<th>
+						City
+					</th>
+					<th>
+						State
+					</th>
+					<th>
+						Zip
+					</th>
+					<th>
+						Phone
+					</th>
+				</tr>
+				<% r.forEach(function(r) { %>
+				<tr>
+					<td><%= r.shelter_id%></td>
+					<td><%= r.shelter_name%></td>
+					<td><%= r.street%></td>
+					<td><%= r.city%></td>
+					<td><%= r.state%></td>
+					<td><%= r.zip%></td>
+					<td><%= r.phone%></td>
+				</tr>
+				<% }); %>
+			</table>
 			
 		</div>
 		
