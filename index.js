@@ -235,7 +235,6 @@ app.get('/shelter_dogs/:shelter_id', function(request, response) {
 
 app.post('/find', function(request, response) {
 	console.log("form submitted");
-	//response.redirect('pages/find');
 	
 	var first_name			 = request.body.first_name;
 	var last_name			 = request.body.last_name;
@@ -397,18 +396,3 @@ app.post('/find', function(request, response) {
 		});
 	});
 });
-
-
-
-function generate_random() {
-	console.log("Button clicked");
-	/*connection.query("SELECT * FROM Dog ORDER BY RANDOM() LIMIT 0,1", function(err, rows) {
-		console.log("Connection opened");
-		if(err) throw err;
-		//connection.end()
-		return {r:rows};
-		connection.end();
-		console.log("Connection closed");
-	});*/
-	document.getElementById("random_dog").innerHTML = "Hello World";
-}
