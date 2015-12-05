@@ -2,15 +2,18 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var passport = require('passport');
-var flash = require('connect-flash');
-var session = require('express-session');
+//var cookieParser = require('cookie-parser');
+//var passport = require('passport');
+//var flash = require('connect-flash');
+//var session = require('express-session');
 //var cookieSession = require('cookie-session');
 
 var app = express();
 
-app.use(cookieParser('rawr'));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+/*app.use(cookieParser('rawr'));
 app.use(session({
     secret: 'rawr',
     resave: true,
@@ -18,10 +21,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-app.use(flash());
-
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(flash());*/
 
 //app.use(session({secret: 'ssshhhhh'}));
 
@@ -92,36 +92,12 @@ app.get('/', function(request, response) {
 	response.render('pages/index');
 });
 
-app.get('/about', function(request, response) {
-	response.render('pages/about');
+app.get('/dog', function(request, response) {
+	response.render('pages/dog');
 });
 
-
-/*app.get('/login', function(request, response) {
-	response.render('pages/login');
-});
-
-	app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/find', // redirect to the secure profile section
-        failureRedirect : '/', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));*/
-
-app.get('/signup', function(request, response) {
-	response.render('pages/signup');
-});
-
-app.get('/logout', function(request, response) {
-	request.logout();
-	response.redirect('/');
-});
-
-app.get('/adopt', function(request, response) {
-	response.render('pages/adopt');
-});
-
-app.get('/foster', function(request, response) {
-	response.render('pages/foster');
+app.get('/shelter', function(request, response) {
+	response.render('pages/shelter');
 });
 
 app.post('/adopt_signup', function(request, response) {
@@ -160,7 +136,7 @@ app.post('/adopt_signup', function(request, response) {
 	}
 	
 	if(has_other_pets==="TRUE") {
-		q_pets = "d.okay_with_other_pets='TRUE'"; // dog with be okay with other pets
+		q_pets = "d.okay_with_other_pets='TRUE'"; // dog must be okay with other pets
 	}
 	else {
 		q_pets = "";
@@ -227,8 +203,6 @@ app.post('/adopt_signup', function(request, response) {
 			response.render('pages/find', {r:rows});
 		});
 	}
-	
-	
 	
 	/*var post  = {first_name: first_name, last_name: last_name, street: street, city: city, state: state, zip: zip, email: email, phone: phone, house_style, house_style, has_fenced_yard: has_fenced_yard, has_kids: has_kids, has_other_pets: has_other_pets, lifestyle_preference: lifestyle_preference, personality: personality};
 	

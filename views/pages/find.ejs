@@ -64,7 +64,7 @@
 					<td><%= r.coat%></td>
 					<td><%= r.personality%></td>
 					<td><%= r.energy_level%></td>
-					<td><a href="/" type="button" onclick="findShelter()">Click here</a></td>
+					<td><a href="/shelter/" + <%= r.shelter_id%> + "" type="button" onclick="findShelter()"><%= r.shelter_id%></a></td>
 				</tr>
 				<% }); %>
 				</table>
