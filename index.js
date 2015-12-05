@@ -112,7 +112,7 @@ app.get('/dog', function(request, response) {
 	});
 	
 	app.get('/dog/sort-energy', function(request, response) {
-		connection.query(dog_query + " ORDER BY d.energy_level ASC", function(err, rows) {
+		connection.query(dog_query + " ORDER BY CASE WHEN d.energy_level = 'low' THEN 1 WHEN d.energy_level = 'medium' THEN 2 WHEN d.energy_level = 'high' THEN 3 ELSE 4 END", function(err, rows) {
 			response.render('pages/dog', {r:rows});
 		});
 	});
@@ -230,7 +230,7 @@ app.get('/shelter_dogs/:shelter_id', function(request, response) {
 	});
 	
 	app.get('/shelter_dogs/' + id + '/sort-energy', function(request, response) {
-		connection.query(shelter_id_query + " ORDER BY d.energy_level ASC", function(err, rows) {
+		connection.query(shelter_id_query + " ORDER BY CASE WHEN d.energy_level = 'low' THEN 1 WHEN d.energy_level = 'medium' THEN 2 WHEN d.energy_level = 'high' THEN 3 ELSE 4 END", function(err, rows) {
 			response.render('pages/shelter_dogs', {r:rows});
 		});
 	});
@@ -394,7 +394,7 @@ app.post('/find', function(request, response) {
 	});
 
 	app.get('/find/sort-energy', function(request, response) {
-		connection.query(q + " ORDER BY d.energy_level ASC", function(err, rows) {
+		connection.query(q + " ORDER BY CASE WHEN d.energy_level = 'low' THEN 1 WHEN d.energy_level = 'medium' THEN 2 WHEN d.energy_level = 'high' THEN 3 ELSE 4 END", function(err, rows) {
 			response.render('pages/find', {r:rows});
 		});
 	});
