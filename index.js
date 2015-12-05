@@ -107,9 +107,16 @@ app.get('/shelter', function(request, response) {
 app.get('/shelter/:shelter_id', function(request, response) {
 	var id = request.params.shelter_id;
 	
-	connection.query("SELECT * FROM animalshelter.Shelter s WHERE s.shelter_id = '" + id + "'", function(err, rows) {
-		response.render('pages/shelter', {r:rows});
+	connection.query("SELECT * FROM animalshelter.Shelter s, animalshelter.Dog d WHERE s.shelter_id=d.shelter_id AND s.shelter_id = '" + id + "'", function(err, rows) {
+		response.render('pages/shelter_dogs', {r:rows});
 	});
+	/*connection.query("SELECT * FROM animalshelter.Shelter s WHERE s.shelter_id = '" + id + "' LIMIT 1", function(err, row) {
+		if(err) throw err;
+		connection.query("SELECT * FROM animalshelter.Dog d WHERE d.shelter_id = '" + id + "'", function(err, rows) {
+			if(err) throw err;
+			response.render('pages/shelter_dogs', {s:row}, {d:rows});
+		});
+	});*/
 });
 
 app.post('/adopt_signup', function(request, response) {

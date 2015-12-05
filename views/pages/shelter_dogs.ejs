@@ -8,21 +8,62 @@
 			<a href="/" class="logo">
 				<img src="/logo.png" height="200px" width="200px"/>
 			</a>
-			<h1>List of all Dogs</h1>
+			<h1>Shelter</h1>
 		</div>
 	</div>
 	
 </head>
 
 <body>
-	<section id="dog">
+	<section id="shelter">
 		<div class="container">
+			<h1>Shelter</h1>
 			<table class="table">
 				
 			<tbody>
 				<tr>
 					<th>
-						<a href="sort">Dog ID</a>
+						Shelter ID
+					</th>
+					<th>
+						Name
+					</th>
+					<th>
+						Street
+					</th>
+					<th>
+						City
+					</th>
+					<th>
+						State
+					</th>
+					<th>
+						Zip
+					</th>
+					<th>
+						Phone
+					</th>
+				</tr>
+				<% r.some(function(r) {%>
+				<tr>
+					<td><a href="/shelter/<%= r.shelter_id%>"><%= r.shelter_id%></a></td>
+					<td><%= r.shelter_name%></td>
+					<td><%= r.street%></td>
+					<td><%= r.city%></td>
+					<td><%= r.state%></td>
+					<td><%= r.zip%></td>
+					<td><%= r.phone%></td>
+				</tr>
+				<% return true; }); %>
+			</table>
+			
+			<h1>Dogs</h1>
+			<table class="table">
+				
+			<tbody>
+				<tr>
+					<th>
+						Dog ID
 					</th>
 					<th>
 						Name
@@ -48,9 +89,6 @@
 					<th>
 						Energy Level
 					</th>
-					<th>
-						Shelter
-					</th>
 				</tr>
 				<% r.forEach(function(r) { %>
 				<tr>
@@ -63,11 +101,9 @@
 					<td><%= r.coat%></td>
 					<td><%= r.personality%></td>
 					<td><%= r.energy_level%></td>
-					<td><a href="/shelter/<%= r.shelter_id%>"><%= r.shelter_id%></a></td>
 				</tr>
 				<% }); %>
 			</table>
-			
 		</div>
 		
 		
