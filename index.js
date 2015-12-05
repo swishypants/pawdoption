@@ -18,12 +18,21 @@ var connection = mysql.createConnection({
 	database: 'animalshelter'
 });
 
+/*var connection = mysql.createConnection({
+	host: 'pawdoption.cqfes6my9qk1.us-east-1.rds.amazonaws.com',
+	port: '3306',
+	user: 'pawdoption',
+	password: 'pawdoption',
+	database: 'innodb'
+});*/
+
 
 connection.connect(function(err){
 	if(!err){
 		console.log("Database is connected :D \n");
 	}else{
 		console.log("Error connecting database D: \n");
+		console.log(err);
 	}
 });
 
@@ -85,7 +94,7 @@ app.get('/dog', function(request, response) {
 	});
 	
 	app.get('/dog/sort-size', function(request, response) {
-		connection.query(dog_query + " ORDER BY d.size ASC", function(err, rows) {
+		connection.query(dog_query + " ORDER BY d.size DESC", function(err, rows) {
 			response.render('pages/dog', {r:rows});
 		});
 	});
@@ -203,7 +212,7 @@ app.get('/shelter_dogs/:shelter_id', function(request, response) {
 	});
 	
 	app.get('/shelter_dogs/' + id + '/sort-size', function(request, response) {
-		connection.query(shelter_id_query + " ORDER BY d.size ASC", function(err, rows) {
+		connection.query(shelter_id_query + " ORDER BY d.size DESC", function(err, rows) {
 			response.render('pages/shelter_dogs', {r:rows});
 		});
 	});
@@ -367,7 +376,7 @@ app.post('/find', function(request, response) {
 	});
 
 	app.get('/find/sort-size', function(request, response) {
-		connection.query(q + " ORDER BY d.size ASC", function(err, rows) {
+		connection.query(q + " ORDER BY d.size DESC", function(err, rows) {
 			response.render('pages/find', {r:rows});
 		});
 	});
