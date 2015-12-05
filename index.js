@@ -178,17 +178,17 @@ app.post('/adopt_signup', function(request, response) {
 			response.render('pages/find', {r:rows});
 		});
 	}
-	else if(q_size==="") { // q_kids and q_pets
+	else if(q_size==="" && q_kids!="" && q_pets!="") { // q_kids and q_pets
 		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_kids + " AND " + q_pets + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
 			response.render('pages/find', {r:rows});
 		});
 	}
-	else if(q_kids==="") { // q_size and q_pets
+	else if(q_kids==="" && q_size!="" && q_pets!="") { // q_size and q_pets
 		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_size + " AND " + q_pets + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
 			response.render('pages/find', {r:rows});
 		});
 	}
-	else if(q_pets==="") { // q_size and q_kids
+	else if(q_pets==="" && q_size!="" && q_kids!="") { // q_size and q_kids
 		connection.query("SELECT * FROM animalshelter.Dog d WHERE " + q_size + " AND " + q_kids + " AND " + q_personality + " AND " + q_energy, function(err, rows) {
 			response.render('pages/find', {r:rows});
 		});
