@@ -2,58 +2,11 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
-//var cookieParser = require('cookie-parser');
-//var passport = require('passport');
-//var flash = require('connect-flash');
-//var session = require('express-session');
-//var cookieSession = require('cookie-session');
 
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-
-/*app.use(cookieParser('rawr'));
-app.use(session({
-    secret: 'rawr',
-    resave: true,
-    saveUninitialized: true
-}));
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash());*/
-
-//app.use(session({secret: 'ssshhhhh'}));
-
-//var LocalStrategy = require('passport-local').Strategy;
-//require('./app/routes.js')(app, passport);
-
-// expose this function to our app using module.exports
-
-
-
-// need cookieParser middleware before we can do anything with cookies
-/*app.use(cookieParser());
-
-// set a cookie
-app.use(function (req, res, next) {
-  // check if client sent cookie
-  var cookie = req.cookies.cookieName;
-  if (cookie === undefined)
-  {
-    // no: set a new cookie
-    var randomNumber=Math.random().toString();
-    randomNumber=randomNumber.substring(2,randomNumber.length);
-    res.cookie('cookieName',randomNumber, { maxAge: 900000, httpOnly: true });
-    console.log('cookie created successfully');
-  } 
-  else
-  {
-    // yes, cookie was already present 
-    console.log('cookie exists', cookie);
-  } 
-  next(); // <-- important!
-});*/
 
 
 
@@ -91,12 +44,6 @@ app.listen(app.get('port'), function() {
 app.get('/', function(request, response) {
 	response.render('pages/index');
 });
-
-/*app.get('/sort', function(request, response) {
-	connection.query(q + " ORDER BY d.name ASC", function(err, rows) {
-		response.render('pages/dog', {r:rows});
-	});
-});*/
 
 var dog_query = "SELECT * FROM Dog d";
 var shelter_query = "SELECT * FROM Shelter s";
@@ -231,55 +178,55 @@ app.get('/shelter_dogs/:shelter_id', function(request, response) {
 		});
 	});
 	
-	app.get('/shelter_dogs/:shelter_id/sort-name', function(request, response) {
+	app.get('/shelter_dogs/' + id + '/sort-name', function(request, response) {
 		connection.query(shelter_id_query + " ORDER BY d.name ASC", function(err, rows) {
 			response.render('pages/shelter_dogs', {r:rows});
 		});
 	});
 	
-	app.get('/shelter_dogs/:shelter_id/sort-age', function(request, response) {
+	app.get('/shelter_dogs/' + id + '/sort-age', function(request, response) {
 		connection.query(shelter_id_query + " ORDER BY d.age ASC", function(err, rows) {
 			response.render('pages/shelter_dogs', {r:rows});
 		});
 	});
 	
-	app.get('/shelter_dogs/:shelter_id/sort-gender', function(request, response) {
+	app.get('/shelter_dogs/' + id + '/sort-gender', function(request, response) {
 		connection.query(shelter_id_query + " ORDER BY d.gender ASC", function(err, rows) {
 			response.render('pages/shelter_dogs', {r:rows});
 		});
 	});
 	
-	app.get('/shelter_dogs/:shelter_id/sort-breed', function(request, response) {
+	app.get('/shelter_dogs/' + id + '/sort-breed', function(request, response) {
 		connection.query(shelter_id_query + " ORDER BY d.breed ASC", function(err, rows) {
 			response.render('pages/shelter_dogs', {r:rows});
 		});
 	});
 	
-	app.get('/shelter_dogs/:shelter_id/sort-size', function(request, response) {
+	app.get('/shelter_dogs/' + id + '/sort-size', function(request, response) {
 		connection.query(shelter_id_query + " ORDER BY d.size ASC", function(err, rows) {
 			response.render('pages/shelter_dogs', {r:rows});
 		});
 	});
 	
-	app.get('/shelter_dogs/:shelter_id/sort-coat', function(request, response) {
+	app.get('/shelter_dogs/' + id + '/sort-coat', function(request, response) {
 		connection.query(shelter_id_query + " ORDER BY d.coat ASC", function(err, rows) {
 			response.render('pages/shelter_dogs', {r:rows});
 		});
 	});
 	
-	app.get('/shelter_dogs/:shelter_id/sort-personality', function(request, response) {
+	app.get('/shelter_dogs/' + id + '/sort-personality', function(request, response) {
 		connection.query(shelter_id_query + " ORDER BY d.personality ASC", function(err, rows) {
 			response.render('pages/shelter_dogs', {r:rows});
 		});
 	});
 	
-	app.get('/shelter_dogs/:shelter_id/sort-energy', function(request, response) {
+	app.get('/shelter_dogs/' + id + '/sort-energy', function(request, response) {
 		connection.query(shelter_id_query + " ORDER BY d.energy_level ASC", function(err, rows) {
 			response.render('pages/shelter_dogs', {r:rows});
 		});
 	});
 	
-	app.get('/shelter_dogs/:shelter_id/sort-shelter', function(request, response) {
+	app.get('/shelter_dogs/' + id + '/sort-shelter', function(request, response) {
 		connection.query(shelter_id_query + " ORDER BY d.shelter_id ASC", function(err, rows) {
 			response.render('pages/shelter_dogs', {r:rows});
 		});
@@ -390,65 +337,65 @@ app.post('/find', function(request, response) {
 	console.log(query.sql);*/
 	
 	// sort find
-app.get('/find/sort-id', function(request, response) {
-	connection.query(q + " ORDER BY d.dog_id ASC", function(err, rows) {
-		response.render('pages/find', {r:rows});
+	app.get('/find/sort-id', function(request, response) {
+		connection.query(q + " ORDER BY d.dog_id ASC", function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
 	});
-});
 
-app.get('/find/sort-name', function(request, response) {
-	connection.query(q + " ORDER BY d.name ASC", function(err, rows) {
-		response.render('pages/find', {r:rows});
+	app.get('/find/sort-name', function(request, response) {
+		connection.query(q + " ORDER BY d.name ASC", function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
 	});
-});
 
-app.get('/find/sort-age', function(request, response) {
-	connection.query(q + " ORDER BY d.age ASC", function(err, rows) {
-		response.render('pages/find', {r:rows});
+	app.get('/find/sort-age', function(request, response) {
+		connection.query(q + " ORDER BY d.age ASC", function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
 	});
-});
 
-app.get('/find/sort-gender', function(request, response) {
-	connection.query(q + " ORDER BY d.gender ASC", function(err, rows) {
-		response.render('pages/find', {r:rows});
+	app.get('/find/sort-gender', function(request, response) {
+		connection.query(q + " ORDER BY d.gender ASC", function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
 	});
-});
 
-app.get('/find/sort-breed', function(request, response) {
-	connection.query(q + " ORDER BY d.breed ASC", function(err, rows) {
-		response.render('pages/find', {r:rows});
+	app.get('/find/sort-breed', function(request, response) {
+		connection.query(q + " ORDER BY d.breed ASC", function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
 	});
-});
 
-app.get('/find/sort-size', function(request, response) {
-	connection.query(q + " ORDER BY d.size ASC", function(err, rows) {
-		response.render('pages/find', {r:rows});
+	app.get('/find/sort-size', function(request, response) {
+		connection.query(q + " ORDER BY d.size ASC", function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
 	});
-});
 
-app.get('/find/sort-coat', function(request, response) {
-	connection.query(q + " ORDER BY d.coat ASC", function(err, rows) {
-		response.render('pages/find', {r:rows});
+	app.get('/find/sort-coat', function(request, response) {
+		connection.query(q + " ORDER BY d.coat ASC", function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
 	});
-});
 
-app.get('/find/sort-personality', function(request, response) {
-	connection.query(q + " ORDER BY d.personality ASC", function(err, rows) {
-		response.render('pages/find', {r:rows});
+	app.get('/find/sort-personality', function(request, response) {
+		connection.query(q + " ORDER BY d.personality ASC", function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
 	});
-});
 
-app.get('/find/sort-energy', function(request, response) {
-	connection.query(q + " ORDER BY d.energy_level ASC", function(err, rows) {
-		response.render('pages/find', {r:rows});
+	app.get('/find/sort-energy', function(request, response) {
+		connection.query(q + " ORDER BY d.energy_level ASC", function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
 	});
-});
 
-app.get('/find/sort-shelter', function(request, response) {
-	connection.query(q + " ORDER BY d.shelter_id ASC", function(err, rows) {
-		response.render('pages/find', {r:rows});
+	app.get('/find/sort-shelter', function(request, response) {
+		connection.query(q + " ORDER BY d.shelter_id ASC", function(err, rows) {
+			response.render('pages/find', {r:rows});
+		});
 	});
-});
 });
 
 
