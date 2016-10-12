@@ -1,3 +1,5 @@
+const config = require('./config.js');
+
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
@@ -8,24 +10,13 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-
-
 var connection = mysql.createConnection({
-	host: 'animalshelter.cqfes6my9qk1.us-east-1.rds.amazonaws.com',
-	port: '3306',
-	user: 'animalshelter',
-	password: 'doggies1',
-	database: 'animalshelter'
+	host: config.host,
+	port: config.port,
+	user: config.user,
+	password: config.password,
+	database: config.database
 });
-
-/*var connection = mysql.createConnection({
-	host: 'pawdoption.cqfes6my9qk1.us-east-1.rds.amazonaws.com',
-	port: '3306',
-	user: 'pawdoption',
-	password: 'pawdoption',
-	database: 'innodb'
-});*/
-
 
 connection.connect(function(err){
 	if(!err){
