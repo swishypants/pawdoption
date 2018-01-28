@@ -1,5 +1,3 @@
-const config = require('./config.js');
-
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
@@ -11,11 +9,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 var connection = mysql.createConnection({
-	host: config.host,
-	port: config.port,
-	user: config.user,
-	password: config.password,
-	database: config.database
+	host: process.env.host,
+	port: process.env.port,
+	user: process.env.user,
+	password: process.env.password,
+	database: process.env.database
 });
 
 connection.connect(function(err){
