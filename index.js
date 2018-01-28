@@ -289,7 +289,7 @@ app.post('/find', function(request, response) {
 		q_personality = "d.personality!='independent'";
 		q += q_personality + " AND ";
 	}
-	else if(personality==="phlegmatic") {
+	else if(personality==="phlegmatic" || personality==="null") {
 		q_personality = "d.personality!='confident'";
 		q += q_personality + " AND ";
 	}
@@ -306,7 +306,7 @@ app.post('/find', function(request, response) {
 		q_energy = "d.energy_level='medium'";
 		q += q_energy;
 	}
-	else if(lifestyle_preference==="inactive") {
+	else if(lifestyle_preference==="inactive" || lifestyle_preference==="null") {
 		q_energy = "d.energy_level='low'";
 		q += q_energy;
 	}
