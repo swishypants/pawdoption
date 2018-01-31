@@ -1,12 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
-var bodyParser = require('body-parser');
 
 var app = express();
-
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
 
 var connection = mysql.createConnection({
 	host: process.env.host,
@@ -43,12 +39,16 @@ app.get('/', function(request, response) {
 	response.render('pages/index');
 });
 
+app.get('/about', function(request, response) {
+	response.render('pages/about');
+});
+
 var dog_query = "SELECT * FROM Dog d";
 var shelter_query = "SELECT * FROM Shelter s";
 
 app.get('/dog', function(request, response) {
 	connection.query(dog_query, function(err, rows) {
-		response.render('pages/dog', {r:rows});
+		response.render('pages/dog', {r: rows});
 	});
 	
 	// sort
